@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.malaysiaairlines.com)",
+      "WebFetch(domain:www.halalzilla.com)",
+      "WebFetch(domain:www.12fly.com.my)",
+      "WebFetch(domain:zafigo.com)",
+      "WebFetch(domain:www.traveloka.com)",
+      "Bash(start \"\" \"c:\\\\Code\\\\Web\\\\fnf\\\\index.html\")"
+    ]
+  }
+}

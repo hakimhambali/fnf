@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Name Formatter - Format Your Name for Flight Bookings</title>
+    <meta name="description" content="Free tool to format your name correctly for Malaysia Airlines and AirAsia flight bookings. Avoid check-in issues by entering your name exactly as it appears on your passport.">
+    <meta name="keywords" content="flight name formatter, Malaysia Airlines name format, AirAsia name format, booking name guide, passport name format, flight booking name, MAS name entry, AirAsia given name surname">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://flightnameformatter.com/">
+    <meta property="og:title" content="Flight Name Formatter - Format Your Name for Flight Bookings">
+    <meta property="og:description" content="Free tool to format your name correctly for Malaysia Airlines and AirAsia flight bookings. Match your passport name to airline booking fields instantly.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_MY">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Flight Name Formatter">
+    <meta name="twitter:description" content="Format your name correctly for Malaysia Airlines and AirAsia flight bookings.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Flight Name Formatter",
+        "description": "Format your name correctly for Malaysia Airlines and AirAsia flight bookings to match your passport.",
+        "applicationCategory": "TravelApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "MYR"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I fill in my name for Malaysia Airlines booking?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Malaysia Airlines uses 'First & Middle Name' and 'Last Name / Surname' fields. For Malay names with Bin/Binti, place the given name in the first field and Bin/Binti plus the father's name in the surname field. For example, AHMAD FALIQ BIN HAMEDI becomes First & Middle Name: AHMAD FALIQ, Last Name: BIN HAMEDI."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I fill in my name for AirAsia booking?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "AirAsia uses 'Given Name' and 'Family Name / Surname' fields. The formatting follows the same logic: given names go in the first field, and the family name or patronymic goes in the surname field. For example, AHMAD FALIQ BIN HAMEDI becomes Given Name: AHMAD FALIQ, Family Name: BIN HAMEDI."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-primary: #1a56db;
+            --color-primary-dark: #1344b0;
+            --color-bg: #f0f4f8;
+            --color-surface: #ffffff;
+            --color-text: #1e293b;
+            --color-text-secondary: #64748b;
+            --color-border: #e2e8f0;
+            --color-accent: #059669;
+            --color-accent-bg: #ecfdf5;
+            --color-warning-bg: #fffbeb;
+            --color-warning-border: #f59e0b;
+            --radius: 12px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            --shadow-lg: 0 4px 24px rgba(0,0,0,0.10);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+            color: #fff;
+            padding: 2.5rem 1rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 640px;
+            margin: -1.5rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .step-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            background: var(--color-surface);
+            color: var(--color-text);
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        select:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.15);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--color-text-secondary);
+        }
+
+        .hint {
+            font-size: 0.82rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.4rem;
+        }
+
+        .result-card {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+            border: 2px solid var(--color-accent);
+            display: none;
+        }
+
+        .result-card.visible {
+            display: block;
+        }
+
+        .result-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .result-heading svg {
+            flex-shrink: 0;
+        }
+
+        .result-field {
+            background: var(--color-accent-bg);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .result-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-field-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .result-field-value {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: 0.02em;
+            word-break: break-word;
+        }
+
+        .tip-box {
+            background: var(--color-warning-bg);
+            border-left: 4px solid var(--color-warning-border);
+            border-radius: 0 8px 8px 0;
+            padding: 0.85rem 1rem;
+            font-size: 0.85rem;
+            color: var(--color-text);
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        .tip-box strong {
+            color: #92400e;
+        }
+
+        .name-type-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .name-type-btn {
+            padding: 0.4rem 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 2px solid var(--color-border);
+            border-radius: 20px;
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .name-type-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .name-type-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #fff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        article.info-section {
+            max-width: 640px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        article.info-section .card {
+            padding: 1.5rem 1.75rem;
+        }
+
+        article.info-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        article.info-section h3 {
+            font-size: 1rem;
+            margin: 1rem 0 0.4rem;
+        }
+
+        article.info-section p,
+        article.info-section li {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.65;
+        }
+
+        article.info-section ul {
+            padding-left: 1.25rem;
+            margin-top: 0.3rem;
+        }
+
+        article.info-section li {
+            margin-bottom: 0.25rem;
+        }
+
+        article.info-section a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        article.info-section a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            border-top: 1px solid var(--color-border);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 2rem 1rem 1.5rem;
+            }
+            header h1 {
+                font-size: 1.35rem;
+            }
+            .card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flight Name Formatter</h1>
+        <p>Format your name correctly for airline bookings to match your passport and avoid check-in issues.</p>
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="step-label"><span class="step-number">1</span> Select Airline</div>
+            <label for="airline">Airline</label>
+            <select id="airline">
+                <option value="" disabled selected>Choose an airline</option>
+                <option value="mas">Malaysia Airlines (MAS)</option>
+                <option value="airasia">AirAsia</option>
+            </select>
+        </div>
+
+        <div class="card" id="name-section">
+            <div class="step-label"><span class="step-number">2</span> Enter Your Name</div>
+            <label for="fullname">Full Name (as shown on passport)</label>
+            <input type="text" id="fullname" placeholder="e.g. AHMAD FALIQ BIN HAMEDI" autocomplete="name" autocapitalize="characters">
+            <p class="hint">Enter your name exactly as it appears on your passport, in UPPERCASE.</p>
+
+            <div id="name-type-group" class="hidden">
+                <label style="margin-top: 1rem;">Name type</label>
+                <div class="name-type-selector">
+                    <button type="button" class="name-type-btn active" data-type="auto">Auto-detect</button>
+                    <button type="button" class="name-type-btn" data-type="malay">Malay</button>
+                    <button type="button" class="name-type-btn" data-type="chinese">Chinese</button>
+                    <button type="button" class="name-type-btn" data-type="indian">Indian</button>
+                    <button type="button" class="name-type-btn" data-type="other">Other</button>
+                </div>
+                <p class="hint">Auto-detect works for most names. Select manually if the result looks wrong.</p>
+            </div>
+        </div>
+
+        <div class="result-card" id="result">
+            <div class="result-heading">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5L8.5 13L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span id="result-airline-label">Formatted for Malaysia Airlines</span>
+            </div>
+            <div id="result-fields"></div>
+            <div class="tip-box">
+                <strong>Tip:</strong> Double-check that this matches the Machine Readable Zone (MRZ) at the bottom of your passport. Remove any symbols like <strong>@</strong>, <strong>-</strong>, or <strong>A/P</strong>/<strong>A/L</strong> unless they appear in the name section of your passport.
+            </div>
+        </div>
+    </main>
+
+    <article class="info-section">
+        <div class="card">
+            <h2>How to Format Your Name for Flight Bookings</h2>
+            <p>Airlines require your name to match your passport exactly. Incorrect names may result in denied boarding or additional fees for name corrections. This tool helps you split your full name into the correct fields used by each airline.</p>
+
+            <h3>Malaysia Airlines (MAS)</h3>
+            <p>Malaysia Airlines uses two fields: <strong>First &amp; Middle Name</strong> and <strong>Last Name / Surname</strong>.</p>
+            <ul>
+                <li><strong>Malay names:</strong> Place the given name in "First &amp; Middle Name" and Bin/Binti/Anak plus the patronymic in "Last Name / Surname". Example: AHMAD FALIQ BIN HAMEDI &rarr; First &amp; Middle Name: AHMAD FALIQ, Last Name: BIN HAMEDI.</li>
+                <li><strong>Chinese names:</strong> Place the family name in "Last Name / Surname" and the remaining names in "First &amp; Middle Name". Example: TAN MEE LING &rarr; First &amp; Middle Name: MEE LING, Last Name: TAN.</li>
+                <li><strong>Indian names:</strong> Place the given name in "First &amp; Middle Name" and the family or patronymic name in "Last Name / Surname".</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.malaysiaairlines.com/my/en/askmh/booking-guide.html" target="_blank" rel="noopener">Malaysia Airlines Booking Guide</a></p>
+
+            <h3>AirAsia</h3>
+            <p>AirAsia uses two fields: <strong>Given Name</strong> and <strong>Family Name / Surname</strong>. The formatting logic is the same as Malaysia Airlines.</p>
+            <ul>
+                <li><strong>Malay names:</strong> Given Name: AHMAD FALIQ, Family Name: BIN HAMEDI.</li>
+                <li><strong>Chinese names:</strong> Given Name: MEE LING, Family Name: TAN.</li>
+                <li>Remove the <strong>@</strong> symbol and replace with a space. Omit <strong>A/P</strong> or <strong>A/L</strong> unless they appear in the name section of your passport. Replace hyphens with a space.</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://support.airasia.com/s/article/How-should-I-fill-up-the-guest-and-contact-details-when-booking-a-flight?language=en_GB" target="_blank" rel="noopener">AirAsia Guest Details Guide</a></p>
+        </div>
+    </article>
+
+    <footer>
+        <p>This tool is for guidance only. Always verify against your passport's Machine Readable Zone (MRZ). Not affiliated with any airline.</p>
+    </footer>
+
+    <script>
+        const AIRLINES = {
+            mas: {
+                label: "Malaysia Airlines",
+                fields: [
+                    { key: "first", label: "First & Middle Name" },
+                    { key: "last", label: "Last Name / Surname" }
+                ]
+            },
+            airasia: {
+                label: "AirAsia",
+                fields: [
+                    { key: "first", label: "Given Name" },
+                    { key: "last", label: "Family Name / Surname" }
+                ]
+            }
+        };
+
+        const MALAY_MARKERS = ["BIN", "BINTI", "BINTE", "ANAK", "A/L", "A/P"];
+
+        const airlineEl = document.getElementById("airline");
+        const fullnameEl = document.getElementById("fullname");
+        const nameTypeGroup = document.getElementById("name-type-group");
+        const resultCard = document.getElementById("result");
+        const resultFields = document.getElementById("result-fields");
+        const resultLabel = document.getElementById("result-airline-label");
+        const nameTypeBtns = document.querySelectorAll(".name-type-btn");
+
+        let selectedType = "auto";
+
+        nameTypeBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                nameTypeBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                selectedType = btn.dataset.type;
+                update();
+            });
+        });
+
+        airlineEl.addEventListener("change", update);
+        fullnameEl.addEventListener("input", () => {
+            fullnameEl.value = fullnameEl.value.toUpperCase();
+            update();
+        });
+
+        function cleanName(raw) {
+            return raw
+                .replace(/[@]/g, " ")
+                .replace(/[-]/g, " ")
+                .replace(/[^A-Z\s\/]/g, "")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function detectType(parts) {
+            for (let i = 0; i < parts.length; i++) {
+                const combined = parts.slice(i).join(" ");
+                for (const marker of MALAY_MARKERS) {
+                    if (combined === marker || combined.startsWith(marker + " ")) {
+                        return "malay";
+                    }
+                }
+            }
+            return "other";
+        }
+
+        function splitName(name, type) {
+            const parts = name.split(" ").filter(Boolean);
+            if (parts.length === 0) return null;
+            if (parts.length === 1) return { first: parts[0], last: "" };
+
+            const effectiveType = type === "auto" ? detectType(parts) : type;
+
+            if (effectiveType === "malay") {
+                for (let i = 0; i < parts.length; i++) {
+                    const rest = parts.slice(i).join(" ");
+                    for (const marker of MALAY_MARKERS) {
+                        if (rest === marker || rest.startsWith(marker + " ")) {
+                            const firstName = parts.slice(0, i).join(" ");
+                            const lastName = parts.slice(i).join(" ")
+                                .replace(/^A\/L\b/, "")
+                                .replace(/^A\/P\b/, "")
+                                .trim();
+                            return {
+                                first: firstName || lastName,
+                                last: firstName ? lastName : ""
+                            };
+                        }
+                    }
+                }
+                return { first: parts.slice(0, -1).join(" "), last: parts[parts.length - 1] };
+            }
+
+            if (effectiveType === "chinese") {
+                return { first: parts.slice(1).join(" "), last: parts[0] };
+            }
+
+            if (effectiveType === "indian") {
+                return { first: parts.slice(0, -1).join(" "), last: parts[parts.length - 1] };
+            }
+
+            return { first: parts.slice(0, -1).join(" "), last: parts[parts.length - 1] };
+        }
+
+        function update() {
+            const airlineKey = airlineEl.value;
+            const raw = fullnameEl.value;
+            const name = cleanName(raw);
+
+            if (!airlineKey || !name) {
+                resultCard.classList.remove("visible");
+                nameTypeGroup.classList.toggle("hidden", !name);
+                return;
+            }
+
+            nameTypeGroup.classList.remove("hidden");
+
+            const airline = AIRLINES[airlineKey];
+            const result = splitName(name, selectedType);
+
+            if (!result) {
+                resultCard.classList.remove("visible");
+                return;
+            }
+
+            resultLabel.textContent = "Formatted for " + airline.label;
+
+            resultFields.innerHTML = airline.fields.map(field => {
+                const value = result[field.key] || "(leave empty)";
+                return `<div class="result-field">
+                    <div class="result-field-label">${field.label}</div>
+                    <div class="result-field-value">${value}</div>
+                </div>`;
+            }).join("");
+
+            resultCard.classList.add("visible");
+        }
+    </script>
+</body>
+</html>
