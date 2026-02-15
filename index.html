@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Name Formatter - Format Your Name for Flight Bookings</title>
-    <meta name="description" content="Free tool to format your name correctly for Malaysia Airlines and AirAsia flight bookings. Avoid check-in issues by entering your name exactly as it appears on your passport.">
-    <meta name="keywords" content="flight name formatter, Malaysia Airlines name format, AirAsia name format, booking name guide, passport name format, flight booking name, MAS name entry, AirAsia given name surname">
+    <meta name="description" content="Free tool to format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings. Avoid check-in issues by entering your name exactly as it appears on your passport.">
+    <meta name="keywords" content="flight name formatter, Malaysia Airlines name format, AirAsia name format, Batik Air name format, booking name guide, passport name format, flight booking name, MAS name entry, AirAsia given name surname">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://flightnameformatter.com/">
     <meta property="og:title" content="Flight Name Formatter - Format Your Name for Flight Bookings">
-    <meta property="og:description" content="Free tool to format your name correctly for Malaysia Airlines and AirAsia flight bookings. Match your passport name to airline booking fields instantly.">
+    <meta property="og:description" content="Free tool to format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings. Match your passport name to airline booking fields instantly.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_MY">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Flight Name Formatter">
-    <meta name="twitter:description" content="Format your name correctly for Malaysia Airlines and AirAsia flight bookings.">
+    <meta name="twitter:description" content="Format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings.">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Flight Name Formatter",
-        "description": "Format your name correctly for Malaysia Airlines and AirAsia flight bookings to match your passport.",
+        "description": "Format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings to match your passport.",
         "applicationCategory": "TravelApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -49,6 +49,14 @@
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "AirAsia uses 'Given Name' and 'Family Name / Surname' fields. The formatting follows the same logic: given names go in the first field, and the family name or patronymic goes in the surname field. For example, AHMAD FALIQ BIN HAMEDI becomes Given Name: AHMAD FALIQ, Family Name: BIN HAMEDI."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I fill in my name for Batik Air booking?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Batik Air uses 'First Name' and 'Last Name' fields. For Malay names, drop Bin/Binti and place only the father's name in Last Name. For example, MOHAMMED FAZIL BIN MOHAMMED FALEEL becomes First Name: MOHAMMED FAZIL, Last Name: MOHAMMED FALEEL. Single-word names like ISKANDAR should be entered in both fields."
                 }
             }
         ]
@@ -372,6 +380,7 @@
                 <option value="" disabled selected>Choose an airline</option>
                 <option value="mas">Malaysia Airlines (MAS)</option>
                 <option value="airasia">AirAsia</option>
+                <option value="batikair">Batik Air</option>
             </select>
         </div>
 
@@ -428,6 +437,15 @@
                 <li>Remove the <strong>@</strong> symbol and replace with a space. Omit <strong>A/P</strong> or <strong>A/L</strong> unless they appear in the name section of your passport. Replace hyphens with a space.</li>
             </ul>
             <p style="margin-top:0.5rem;">Reference: <a href="https://support.airasia.com/s/article/How-should-I-fill-up-the-guest-and-contact-details-when-booking-a-flight?language=en_GB" target="_blank" rel="noopener">AirAsia Guest Details Guide</a></p>
+
+            <h3>Batik Air</h3>
+            <p>Batik Air uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Unlike other airlines, Bin/Binti is <strong>dropped</strong> from the name.</p>
+            <ul>
+                <li><strong>Malay names:</strong> Drop Bin/Binti and place only the father's name in Last Name. Example: MOHAMMED FAZIL BIN MOHAMMED FALEEL &rarr; First Name: MOHAMMED FAZIL, Last Name: MOHAMMED FALEEL.</li>
+                <li><strong>Chinese names:</strong> Family name goes to Last Name, remaining names to First Name. Example: CATHERINE LOO SIANG YEW &rarr; First Name: CATHERINE SIANG YEW, Last Name: LOO.</li>
+                <li><strong>Indian names:</strong> Given name in First Name, family name in Last Name. Example: SANDRAMOGAN MUNIANDY &rarr; First Name: SANDRAMOGAN, Last Name: MUNIANDY.</li>
+                <li><strong>Single-word names:</strong> Enter the same name in both First Name and Last Name. Example: ISKANDAR &rarr; First Name: ISKANDAR, Last Name: ISKANDAR.</li>
+            </ul>
         </div>
     </article>
 
@@ -449,6 +467,15 @@
                 fields: [
                     { key: "first", label: "Given Name" },
                     { key: "last", label: "Family Name / Surname" }
+                ]
+            },
+            batikair: {
+                label: "Batik Air",
+                dropMarker: true,
+                duplicateSingle: true,
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
                 ]
             }
         };
@@ -501,10 +528,18 @@
             return "other";
         }
 
-        function splitName(name, type) {
+        function splitName(name, type, airlineOpts) {
             const parts = name.split(" ").filter(Boolean);
             if (parts.length === 0) return null;
-            if (parts.length === 1) return { first: parts[0], last: "" };
+
+            const dropMarker = airlineOpts && airlineOpts.dropMarker;
+            const duplicateSingle = airlineOpts && airlineOpts.duplicateSingle;
+
+            if (parts.length === 1) {
+                return duplicateSingle
+                    ? { first: parts[0], last: parts[0] }
+                    : { first: parts[0], last: "" };
+            }
 
             const effectiveType = type === "auto" ? detectType(parts) : type;
 
@@ -514,10 +549,16 @@
                     for (const marker of MALAY_MARKERS) {
                         if (rest === marker || rest.startsWith(marker + " ")) {
                             const firstName = parts.slice(0, i).join(" ");
-                            const lastName = parts.slice(i).join(" ")
-                                .replace(/^A\/L\b/, "")
-                                .replace(/^A\/P\b/, "")
-                                .trim();
+                            let lastName;
+                            if (dropMarker) {
+                                const markerParts = marker.split(" ").length;
+                                lastName = parts.slice(i + markerParts).join(" ");
+                            } else {
+                                lastName = parts.slice(i).join(" ")
+                                    .replace(/^A\/L\b/, "")
+                                    .replace(/^A\/P\b/, "")
+                                    .trim();
+                            }
                             return {
                                 first: firstName || lastName,
                                 last: firstName ? lastName : ""
@@ -553,7 +594,7 @@
             nameTypeGroup.classList.remove("hidden");
 
             const airline = AIRLINES[airlineKey];
-            const result = splitName(name, selectedType);
+            const result = splitName(name, selectedType, airline);
 
             if (!result) {
                 resultCard.classList.remove("visible");
