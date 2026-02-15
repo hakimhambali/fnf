@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Name Formatter - Format Your Name for Flight Bookings</title>
-    <meta name="description" content="Free tool to format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings. Avoid check-in issues by entering your name exactly as it appears on your passport.">
-    <meta name="keywords" content="flight name formatter, Malaysia Airlines name format, AirAsia name format, Batik Air name format, booking name guide, passport name format, flight booking name, MAS name entry, AirAsia given name surname">
+    <meta name="description" content="Free tool to format your name correctly for Malaysia Airlines, AirAsia, Batik Air, Qatar Airways, Turkish Airlines, ANA, Japan Airlines, Thai Airways, China Airlines, Royal Brunei, SriLankan Airlines, and Firefly flight bookings.">
+    <meta name="keywords" content="flight name formatter, Malaysia Airlines name format, AirAsia name format, Batik Air name format, Qatar Airways name format, Turkish Airlines name format, ANA name format, Japan Airlines name format, Thai Airways name format, China Airlines name format, Royal Brunei name format, SriLankan Airlines name format, Firefly name format, booking name guide, passport name format">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://flightnameformatter.com/">
     <meta property="og:title" content="Flight Name Formatter - Format Your Name for Flight Bookings">
-    <meta property="og:description" content="Free tool to format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings. Match your passport name to airline booking fields instantly.">
+    <meta property="og:description" content="Free tool to format your name correctly for 12 airlines including Malaysia Airlines, AirAsia, Qatar Airways, and more. Match your passport name to airline booking fields instantly.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_MY">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Flight Name Formatter">
-    <meta name="twitter:description" content="Format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings.">
+    <meta name="twitter:description" content="Format your name correctly for 12 airlines including Malaysia Airlines, AirAsia, Qatar Airways, and more.">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Flight Name Formatter",
-        "description": "Format your name correctly for Malaysia Airlines, AirAsia, and Batik Air flight bookings to match your passport.",
+        "description": "Format your name correctly for Malaysia Airlines, AirAsia, Batik Air, Qatar Airways, Turkish Airlines, ANA, Japan Airlines, Thai Airways, China Airlines, Royal Brunei, SriLankan Airlines, and Firefly flight bookings to match your passport.",
         "applicationCategory": "TravelApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -58,6 +58,22 @@
                     "@type": "Answer",
                     "text": "Batik Air uses 'First Name' and 'Last Name' fields. For Malay names, drop Bin/Binti and place only the father's name in Last Name. For example, MOHAMMED FAZIL BIN MOHAMMED FALEEL becomes First Name: MOHAMMED FAZIL, Last Name: MOHAMMED FALEEL. Single-word names like ISKANDAR should be entered in both fields."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I fill in my name for Japan Airlines or ANA booking?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Japan Airlines and ANA use three fields: 'First Name', 'Middle Name', and 'Last Name'. For Malay names with Bin/Binti, enter the first given name as First Name, remaining given names as Middle Name, and Bin/Binti plus the father's name as Last Name."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I fill in my name for China Airlines booking?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "China Airlines uses 'Family Name (Last Name)' and 'Given Name (First Name)'. Important: do not enter spaces or punctuation. Middle names must be combined with the given name without spaces. Single-word names should be entered in both fields."
+                }
             }
         ]
     }
@@ -83,6 +99,9 @@
             --color-accent-bg: #ecfdf5;
             --color-warning-bg: #fffbeb;
             --color-warning-border: #f59e0b;
+            --color-danger-bg: #fef2f2;
+            --color-danger-border: #ef4444;
+            --color-danger-text: #991b1b;
             --radius: 12px;
             --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
             --shadow-lg: 0 4px 24px rgba(0,0,0,0.10);
@@ -298,48 +317,78 @@
             display: none;
         }
 
-        article.info-section {
+        .disclaimer-box {
+            background: var(--color-danger-bg);
+            border: 1px solid var(--color-danger-border);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .disclaimer-box h2 {
+            font-size: 0.95rem;
+            color: var(--color-danger-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .disclaimer-box p,
+        .disclaimer-box li {
+            font-size: 0.82rem;
+            color: var(--color-danger-text);
+            line-height: 1.6;
+        }
+
+        .disclaimer-box ul {
+            padding-left: 1.25rem;
+            margin-top: 0.3rem;
+        }
+
+        .disclaimer-box li {
+            margin-bottom: 0.2rem;
+        }
+
+        section.info-section {
             max-width: 640px;
             margin: 0 auto 2rem;
             padding: 0 1rem;
         }
 
-        article.info-section .card {
+        section.info-section .card {
             padding: 1.5rem 1.75rem;
         }
 
-        article.info-section h2 {
+        section.info-section h2 {
             font-size: 1.2rem;
             margin-bottom: 0.75rem;
         }
 
-        article.info-section h3 {
+        section.info-section h3 {
             font-size: 1rem;
             margin: 1rem 0 0.4rem;
         }
 
-        article.info-section p,
-        article.info-section li {
+        section.info-section p,
+        section.info-section li {
             font-size: 0.9rem;
             color: var(--color-text-secondary);
             line-height: 1.65;
         }
 
-        article.info-section ul {
+        section.info-section ul {
             padding-left: 1.25rem;
             margin-top: 0.3rem;
         }
 
-        article.info-section li {
+        section.info-section li {
             margin-bottom: 0.25rem;
         }
 
-        article.info-section a {
+        section.info-section a {
             color: var(--color-primary);
             text-decoration: none;
         }
 
-        article.info-section a:hover {
+        section.info-section a:hover {
             text-decoration: underline;
         }
 
@@ -381,6 +430,15 @@
                 <option value="mas">Malaysia Airlines (MAS)</option>
                 <option value="airasia">AirAsia</option>
                 <option value="batikair">Batik Air</option>
+                <option value="firefly">Firefly</option>
+                <option value="qatar">Qatar Airways</option>
+                <option value="turkish">Turkish Airlines</option>
+                <option value="thai">Thai Airways</option>
+                <option value="ana">ANA (All Nippon Airways)</option>
+                <option value="jal">Japan Airlines (JAL)</option>
+                <option value="china_airlines">China Airlines</option>
+                <option value="royal_brunei">Royal Brunei Airlines</option>
+                <option value="srilankan">SriLankan Airlines</option>
             </select>
         </div>
 
@@ -415,42 +473,90 @@
         </div>
     </main>
 
-    <article class="info-section">
+    <section class="info-section">
+        <div class="disclaimer-box">
+            <h2>Terms &amp; Conditions / Disclaimer</h2>
+            <p>This tool is provided for <strong>informational and guidance purposes only</strong>. By using this tool, you acknowledge and agree that:</p>
+            <ul>
+                <li>We are <strong>not responsible</strong> for any incorrect name formatting, denied boarding, additional fees, or any other consequences resulting from the use of this tool.</li>
+                <li>Airline name formatting rules may change at any time without notice. This tool may not reflect the most current requirements.</li>
+                <li>You <strong>must always double-check</strong> the formatted name against your passport and verify directly with the airline before completing your booking.</li>
+                <li>This tool is <strong>not affiliated with, endorsed by, or associated with</strong> any airline mentioned on this page.</li>
+                <li>You use this tool entirely <strong>at your own risk</strong>. Always refer to the official airline website or contact their customer service for the most accurate and up-to-date name formatting guidance.</li>
+            </ul>
+        </div>
+
         <div class="card">
             <h2>How to Format Your Name for Flight Bookings</h2>
             <p>Airlines require your name to match your passport exactly. Incorrect names may result in denied boarding or additional fees for name corrections. This tool helps you split your full name into the correct fields used by each airline.</p>
 
             <h3>Malaysia Airlines (MAS)</h3>
-            <p>Malaysia Airlines uses two fields: <strong>First &amp; Middle Name</strong> and <strong>Last Name / Surname</strong>.</p>
+            <p>Uses two fields: <strong>First &amp; Middle Name</strong> and <strong>Last Name / Surname</strong>.</p>
             <ul>
-                <li><strong>Malay names:</strong> Place the given name in "First &amp; Middle Name" and Bin/Binti/Anak plus the patronymic in "Last Name / Surname". Example: AHMAD FALIQ BIN HAMEDI &rarr; First &amp; Middle Name: AHMAD FALIQ, Last Name: BIN HAMEDI.</li>
-                <li><strong>Chinese names:</strong> Place the family name in "Last Name / Surname" and the remaining names in "First &amp; Middle Name". Example: TAN MEE LING &rarr; First &amp; Middle Name: MEE LING, Last Name: TAN.</li>
-                <li><strong>Indian names:</strong> Place the given name in "First &amp; Middle Name" and the family or patronymic name in "Last Name / Surname".</li>
+                <li><strong>Malay names:</strong> Given name in first field, Bin/Binti plus patronymic in surname. Example: AHMAD FALIQ BIN HAMEDI &rarr; First &amp; Middle Name: AHMAD FALIQ, Last Name: BIN HAMEDI.</li>
+                <li><strong>Chinese names:</strong> Family name in surname, remaining names in first field. Example: TAN MEE LING &rarr; First &amp; Middle Name: MEE LING, Last Name: TAN.</li>
+                <li><strong>Indian names:</strong> Given name in first field, family/patronymic name in surname.</li>
             </ul>
             <p style="margin-top:0.5rem;">Reference: <a href="https://www.malaysiaairlines.com/my/en/askmh/booking-guide.html" target="_blank" rel="noopener">Malaysia Airlines Booking Guide</a></p>
 
             <h3>AirAsia</h3>
-            <p>AirAsia uses two fields: <strong>Given Name</strong> and <strong>Family Name / Surname</strong>. The formatting logic is the same as Malaysia Airlines.</p>
+            <p>Uses two fields: <strong>Given Name</strong> and <strong>Family Name / Surname</strong>. Same formatting logic as Malaysia Airlines.</p>
             <ul>
-                <li><strong>Malay names:</strong> Given Name: AHMAD FALIQ, Family Name: BIN HAMEDI.</li>
-                <li><strong>Chinese names:</strong> Given Name: MEE LING, Family Name: TAN.</li>
                 <li>Remove the <strong>@</strong> symbol and replace with a space. Omit <strong>A/P</strong> or <strong>A/L</strong> unless they appear in the name section of your passport. Replace hyphens with a space.</li>
             </ul>
             <p style="margin-top:0.5rem;">Reference: <a href="https://support.airasia.com/s/article/How-should-I-fill-up-the-guest-and-contact-details-when-booking-a-flight?language=en_GB" target="_blank" rel="noopener">AirAsia Guest Details Guide</a></p>
 
             <h3>Batik Air</h3>
-            <p>Batik Air uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Unlike other airlines, Bin/Binti is <strong>dropped</strong> from the name.</p>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Unlike other airlines, Bin/Binti is <strong>dropped</strong> from the name.</p>
             <ul>
-                <li><strong>Malay names:</strong> Drop Bin/Binti and place only the father's name in Last Name. Example: MOHAMMED FAZIL BIN MOHAMMED FALEEL &rarr; First Name: MOHAMMED FAZIL, Last Name: MOHAMMED FALEEL.</li>
-                <li><strong>Chinese names:</strong> Family name goes to Last Name, remaining names to First Name. Example: CATHERINE LOO SIANG YEW &rarr; First Name: CATHERINE SIANG YEW, Last Name: LOO.</li>
-                <li><strong>Indian names:</strong> Given name in First Name, family name in Last Name. Example: SANDRAMOGAN MUNIANDY &rarr; First Name: SANDRAMOGAN, Last Name: MUNIANDY.</li>
-                <li><strong>Single-word names:</strong> Enter the same name in both First Name and Last Name. Example: ISKANDAR &rarr; First Name: ISKANDAR, Last Name: ISKANDAR.</li>
+                <li><strong>Malay names:</strong> Drop Bin/Binti, place only father's name in Last Name. Example: MOHAMMED FAZIL BIN MOHAMMED FALEEL &rarr; First Name: MOHAMMED FAZIL, Last Name: MOHAMMED FALEEL.</li>
+                <li><strong>Single-word names:</strong> Enter the same name in both fields. Example: ISKANDAR &rarr; First Name: ISKANDAR, Last Name: ISKANDAR.</li>
             </ul>
+
+            <h3>Firefly</h3>
+            <p>Uses two fields: <strong>First &amp; Middle Name</strong> and <strong>Last Name / Surname</strong>. Same formatting logic as Malaysia Airlines.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.fireflyz.com.my/my/en/booking-guide.html" target="_blank" rel="noopener">Firefly Booking Guide</a></p>
+
+            <h3>Qatar Airways</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Enter your name exactly as it appears on your passport. First and last names should not exceed 50 characters combined.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.qatarairways.com/tradeportal/en/bookingnticketing/Name-Correction.html" target="_blank" rel="noopener">Qatar Airways Name Guide</a></p>
+
+            <h3>Turkish Airlines</h3>
+            <p>Uses two fields: <strong>First / Middle Name</strong> and <strong>Last Name</strong>. If you have no first name, enter "FNU" in the first name field. First and last names combined must not exceed 46 characters.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.turkishairlines.com/en-eg/tips-for-adding-passenger-names/" target="_blank" rel="noopener">Turkish Airlines Name Tips</a></p>
+
+            <h3>Thai Airways</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Combined characters must not exceed 48. For single-name passengers, use the "I have a single name" option if available.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.thaiairways.com/en-th/content/name-filling-instructions-onlinebookingonly/" target="_blank" rel="noopener">Thai Airways Name Instructions</a></p>
+
+            <h3>ANA (All Nippon Airways)</h3>
+            <p>Uses three fields: <strong>First Name</strong>, <strong>Middle Name</strong>, and <strong>Last Name</strong>. First + middle names combined must be 25 characters or fewer. First + last names combined must be 48 characters or fewer. Remove accents when entering names.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.ana.co.jp/en/th/plan-book/terms/typing/" target="_blank" rel="noopener">ANA Name Entry Guide</a></p>
+
+            <h3>Japan Airlines (JAL)</h3>
+            <p>Uses three fields: <strong>Last Name (Surname)</strong>, <strong>First Name</strong>, and <strong>Middle Name</strong>. Enter names exactly as shown on your passport. Names cannot be changed once booking is complete.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.jal.co.jp/jp/en/guidance/inter/passengername/" target="_blank" rel="noopener">JAL Passenger Name Guide</a></p>
+
+            <h3>China Airlines</h3>
+            <p>Uses two fields: <strong>Family Name (Last Name)</strong> and <strong>Given Name (First Name)</strong>. <strong>Do not enter spaces or punctuation</strong> &mdash; middle names must be combined with the given name without spaces. Single-word names should be entered in both fields. Max 50 characters total.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.china-airlines.com/us/en/booking/book-flights/traveler-name" target="_blank" rel="noopener">China Airlines Traveler Name Guide</a></p>
+
+            <h3>Royal Brunei Airlines</h3>
+            <p>Uses two fields: <strong>Last / Family Name</strong> and <strong>First and Middle Name / Given Name(s)</strong>. For Brunei names with Pg/Dk titles, include them as part of the name. If no first name exists, use the passenger's title as the given name.</p>
+            <ul>
+                <li>Example: NAIRA ELAILAH BINTI ERHAN NOUSHAD &rarr; Given Name(s): NAIRA ELAILAH, Last Name: BINTI ERHAN NOUSHAD.</li>
+                <li>Example: MICHAEL FANG FA RONG &rarr; Given Name(s): FA RONG MICHAEL, Last Name: FANG.</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.flyroyalbrunei.com/malaysia/en/help-support/frequently-asked-questions/booking-with-royal-brunei-airlines/" target="_blank" rel="noopener">Royal Brunei Airlines FAQ</a></p>
+
+            <h3>SriLankan Airlines</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Enter your name as it appears on your passport.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.srilankan.com/en_uk/plan-and-book/passenger-name-tips" target="_blank" rel="noopener">SriLankan Airlines Name Tips</a></p>
         </div>
-    </article>
+    </section>
 
     <footer>
-        <p>This tool is for guidance only. Always verify against your passport's Machine Readable Zone (MRZ). Not affiliated with any airline.</p>
+        <p>This tool is for guidance only. Always verify against your passport and the airline's official website. Not affiliated with any airline.</p>
     </footer>
 
     <script>
@@ -473,6 +579,75 @@
                 label: "Batik Air",
                 dropMarker: true,
                 duplicateSingle: true,
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            firefly: {
+                label: "Firefly",
+                fields: [
+                    { key: "first", label: "First & Middle Name" },
+                    { key: "last", label: "Last Name / Surname" }
+                ]
+            },
+            qatar: {
+                label: "Qatar Airways",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            turkish: {
+                label: "Turkish Airlines",
+                fields: [
+                    { key: "first", label: "First / Middle Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            thai: {
+                label: "Thai Airways",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            ana: {
+                label: "ANA (All Nippon Airways)",
+                threeFields: true,
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "middle", label: "Middle Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            jal: {
+                label: "Japan Airlines (JAL)",
+                threeFields: true,
+                fields: [
+                    { key: "last", label: "Last Name (Surname)" },
+                    { key: "first", label: "First Name" },
+                    { key: "middle", label: "Middle Name" }
+                ]
+            },
+            china_airlines: {
+                label: "China Airlines",
+                noSpaces: true,
+                duplicateSingle: true,
+                fields: [
+                    { key: "last", label: "Family Name (Last Name)" },
+                    { key: "first", label: "Given Name (First Name)" }
+                ]
+            },
+            royal_brunei: {
+                label: "Royal Brunei Airlines",
+                fields: [
+                    { key: "last", label: "Last / Family Name" },
+                    { key: "first", label: "First and Middle Name / Given Name(s)" }
+                ]
+            },
+            srilankan: {
+                label: "SriLankan Airlines",
                 fields: [
                     { key: "first", label: "First Name" },
                     { key: "last", label: "Last Name" }
@@ -534,50 +709,98 @@
 
             const dropMarker = airlineOpts && airlineOpts.dropMarker;
             const duplicateSingle = airlineOpts && airlineOpts.duplicateSingle;
+            const threeFields = airlineOpts && airlineOpts.threeFields;
+            const noSpaces = airlineOpts && airlineOpts.noSpaces;
 
             if (parts.length === 1) {
-                return duplicateSingle
-                    ? { first: parts[0], last: parts[0] }
-                    : { first: parts[0], last: "" };
+                const val = parts[0];
+                if (duplicateSingle) {
+                    return { first: val, middle: "", last: val };
+                }
+                return { first: val, middle: "", last: "" };
             }
 
             const effectiveType = type === "auto" ? detectType(parts) : type;
 
+            let firstName = "", middleName = "", lastName = "";
+
             if (effectiveType === "malay") {
+                let markerIdx = -1, markerLen = 0;
                 for (let i = 0; i < parts.length; i++) {
                     const rest = parts.slice(i).join(" ");
                     for (const marker of MALAY_MARKERS) {
                         if (rest === marker || rest.startsWith(marker + " ")) {
-                            const firstName = parts.slice(0, i).join(" ");
-                            let lastName;
-                            if (dropMarker) {
-                                const markerParts = marker.split(" ").length;
-                                lastName = parts.slice(i + markerParts).join(" ");
-                            } else {
-                                lastName = parts.slice(i).join(" ")
-                                    .replace(/^A\/L\b/, "")
-                                    .replace(/^A\/P\b/, "")
-                                    .trim();
-                            }
-                            return {
-                                first: firstName || lastName,
-                                last: firstName ? lastName : ""
-                            };
+                            markerIdx = i;
+                            markerLen = marker.split(" ").length;
+                            break;
                         }
                     }
+                    if (markerIdx >= 0) break;
                 }
-                return { first: parts.slice(0, -1).join(" "), last: parts[parts.length - 1] };
+
+                if (markerIdx >= 0) {
+                    const givenParts = parts.slice(0, markerIdx);
+                    if (dropMarker) {
+                        lastName = parts.slice(markerIdx + markerLen).join(" ");
+                    } else {
+                        lastName = parts.slice(markerIdx).join(" ")
+                            .replace(/^A\/L\b/, "").replace(/^A\/P\b/, "").trim();
+                    }
+                    if (givenParts.length === 0) {
+                        firstName = lastName;
+                        lastName = "";
+                    } else if (threeFields && givenParts.length > 1) {
+                        firstName = givenParts[0];
+                        middleName = givenParts.slice(1).join(" ");
+                    } else {
+                        firstName = givenParts.join(" ");
+                    }
+                } else {
+                    if (threeFields && parts.length > 2) {
+                        firstName = parts[0];
+                        middleName = parts.slice(1, -1).join(" ");
+                        lastName = parts[parts.length - 1];
+                    } else {
+                        firstName = parts.slice(0, -1).join(" ");
+                        lastName = parts[parts.length - 1];
+                    }
+                }
+            } else if (effectiveType === "chinese") {
+                lastName = parts[0];
+                const givenParts = parts.slice(1);
+                if (threeFields && givenParts.length > 1) {
+                    firstName = givenParts[0];
+                    middleName = givenParts.slice(1).join(" ");
+                } else {
+                    firstName = givenParts.join(" ");
+                }
+            } else if (effectiveType === "indian") {
+                lastName = parts[parts.length - 1];
+                const givenParts = parts.slice(0, -1);
+                if (threeFields && givenParts.length > 1) {
+                    firstName = givenParts[0];
+                    middleName = givenParts.slice(1).join(" ");
+                } else {
+                    firstName = givenParts.join(" ");
+                }
+            } else {
+                lastName = parts[parts.length - 1];
+                const givenParts = parts.slice(0, -1);
+                if (threeFields && givenParts.length > 1) {
+                    firstName = givenParts[0];
+                    middleName = givenParts.slice(1).join(" ");
+                } else {
+                    firstName = givenParts.join(" ");
+                }
             }
 
-            if (effectiveType === "chinese") {
-                return { first: parts.slice(1).join(" "), last: parts[0] };
+            if (noSpaces) {
+                firstName = firstName.replace(/\s+/g, "");
+                middleName = middleName.replace(/\s+/g, "");
+                lastName = lastName.replace(/\s+/g, "");
             }
 
-            if (effectiveType === "indian") {
-                return { first: parts.slice(0, -1).join(" "), last: parts[parts.length - 1] };
-            }
-
-            return { first: parts.slice(0, -1).join(" "), last: parts[parts.length - 1] };
+            return { first: firstName, middle: middleName, last: lastName };
         }
 
         function update() {

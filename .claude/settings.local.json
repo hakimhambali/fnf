@@ -6,7 +6,19 @@
       "WebFetch(domain:www.12fly.com.my)",
       "WebFetch(domain:zafigo.com)",
       "WebFetch(domain:www.traveloka.com)",
-      "Bash(start \"\" \"c:\\\\Code\\\\Web\\\\fnf\\\\index.html\")"
+      "Bash(start \"\" \"c:\\\\Code\\\\Web\\\\fnf\\\\index.html\")",
+      "WebFetch(domain:www.qatarairways.com)",
+      "WebFetch(domain:www.turkishairlines.com)",
+      "WebFetch(domain:www.ana.co.jp)",
+      "WebFetch(domain:www.jal.co.jp)",
+      "WebFetch(domain:www.thaiairways.com)",
+      "WebFetch(domain:www.china-airlines.com)",
+      "WebFetch(domain:www.flyroyalbrunei.com)",
+      "WebFetch(domain:www.srilankan.com)",
+      "WebFetch(domain:www.fireflyz.com.my)",
+      "WebFetch(domain:faq-en.jal.co.jp)",
+      "WebFetch(domain:www.travoinfo.com)",
+      "WebFetch(domain:www.ftd.travel)"
     ]
   }
 }
