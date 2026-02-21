@@ -18,7 +18,10 @@
       "WebFetch(domain:www.fireflyz.com.my)",
       "WebFetch(domain:faq-en.jal.co.jp)",
       "WebFetch(domain:www.travoinfo.com)",
-      "WebFetch(domain:www.ftd.travel)"
+      "WebFetch(domain:www.ftd.travel)",
+      "WebFetch(domain:help.flyscoot.com)",
+      "WebFetch(domain:flyscoot.my.site.com)",
+      "WebFetch(domain:www.hkexpress.com)"
     ]
   }
 }

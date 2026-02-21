@@ -282,39 +282,15 @@
             color: #92400e;
         }
 
-        .name-type-selector {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 0.75rem;
+        .field-required {
+            color: #ef4444;
+            font-weight: 700;
         }
 
-        .name-type-btn {
-            padding: 0.4rem 0.85rem;
-            font-size: 0.82rem;
-            font-weight: 600;
-            border: 2px solid var(--color-border);
-            border-radius: 20px;
-            background: var(--color-surface);
+        .field-optional {
+            font-size: 0.8rem;
+            font-weight: 400;
             color: var(--color-text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .name-type-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-        }
-
-        .name-type-btn.active {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-            color: #fff;
-        }
-
-        .hidden {
-            display: none;
         }
 
         .disclaimer-box {
@@ -439,26 +415,33 @@
                 <option value="china_airlines">China Airlines</option>
                 <option value="royal_brunei">Royal Brunei Airlines</option>
                 <option value="srilankan">SriLankan Airlines</option>
+                <option value="scoot">Scoot</option>
+                <option value="cebu_pacific">Cebu Pacific</option>
+                <option value="lion_air">Lion Air</option>
+                <option value="hk_express">HK Express</option>
+                <option value="air_india">Air India</option>
+                <option value="etihad">Etihad Airways</option>
+                <option value="saudia">Saudia</option>
+                <option value="oman_air">Oman Air</option>
             </select>
         </div>
 
         <div class="card" id="name-section">
             <div class="step-label"><span class="step-number">2</span> Enter Your Name</div>
-            <label for="fullname">Full Name (as shown on passport)</label>
-            <input type="text" id="fullname" placeholder="e.g. AHMAD FALIQ BIN HAMEDI" autocomplete="name" autocapitalize="characters">
-            <p class="hint">Enter your name exactly as it appears on your passport, in UPPERCASE.</p>
 
-            <div id="name-type-group" class="hidden">
-                <label style="margin-top: 1rem;">Name type</label>
-                <div class="name-type-selector">
-                    <button type="button" class="name-type-btn active" data-type="auto">Auto-detect</button>
-                    <button type="button" class="name-type-btn" data-type="malay">Malay</button>
-                    <button type="button" class="name-type-btn" data-type="chinese">Chinese</button>
-                    <button type="button" class="name-type-btn" data-type="indian">Indian</button>
-                    <button type="button" class="name-type-btn" data-type="other">Other</button>
-                </div>
-                <p class="hint">Auto-detect works for most names. Select manually if the result looks wrong.</p>
-            </div>
+            <label for="givenname">Given Name (First Name with Middle Name) <span class="field-required">*</span></label>
+            <input type="text" id="givenname" placeholder="e.g. AHMAD FALIQ or ZHONG or SMITH" autocomplete="given-name" autocapitalize="characters">
+            <p class="hint">Your given name / first name with middle name, everything that is <em>not</em> your surname.</p>
+
+            <label for="patronymic" style="margin-top: 1.1rem;">Father's name indicator (A name between your given name and your family name) <span class="field-optional">(if any)</span></label>
+            <input type="text" id="patronymic" placeholder="e.g. BIN or IVANOVICH or VAN" autocapitalize="characters">
+            <p class="hint">Enter if your name includes a patronymic such as Bin, Ivanovich or van. Leave empty if not applicable.</p>
+
+            <label for="surname" style="margin-top: 1.1rem;">Surname / Family Name / Last Name <span class="field-optional">(if any)</span></label>
+            <input type="text" id="surname" placeholder="e.g. ARIF HAMEDI or TAN or SMITH" autocomplete="family-name" autocapitalize="characters">
+            <p class="hint">Your family name or father's name. Leave empty if you only have a single name.</p>
+
+            <p class="hint" style="margin-top: 1.1rem;">All three fields above combined must match your full name exactly as shown on your IC / passport.</p>
         </div>
 
         <div class="result-card" id="result">
@@ -468,7 +451,7 @@
             </div>
             <div id="result-fields"></div>
             <div class="tip-box">
-                <strong>Tip:</strong> Double-check that this matches the Machine Readable Zone (MRZ) at the bottom of your passport. Remove any symbols like <strong>@</strong>, <strong>-</strong>, or <strong>A/P</strong>/<strong>A/L</strong> unless they appear in the name section of your passport.
+                <strong>Tip:</strong> Always verify this against the Machine Readable Zone (MRZ) at the bottom of your passport before completing your booking. When in doubt, contact the airline directly.
             </div>
         </div>
     </main>
@@ -495,7 +478,7 @@
             <ul>
                 <li><strong>Malay names:</strong> Given name in first field, Bin/Binti plus patronymic in surname. Example: AHMAD FALIQ BIN HAMEDI &rarr; First &amp; Middle Name: AHMAD FALIQ, Last Name: BIN HAMEDI.</li>
                 <li><strong>Chinese names:</strong> Family name in surname, remaining names in first field. Example: TAN MEE LING &rarr; First &amp; Middle Name: MEE LING, Last Name: TAN.</li>
-                <li><strong>Indian names:</strong> Given name in first field, family/patronymic name in surname.</li>
+                <li><strong>Surname is last word</strong> (e.g. most Indian and Western names): Given names in first field, surname/family name in last field.</li>
             </ul>
             <p style="margin-top:0.5rem;">Reference: <a href="https://www.malaysiaairlines.com/my/en/askmh/booking-guide.html" target="_blank" rel="noopener">Malaysia Airlines Booking Guide</a></p>
 
@@ -512,6 +495,7 @@
                 <li><strong>Malay names:</strong> Drop Bin/Binti, place only father's name in Last Name. Example: MOHAMMED FAZIL BIN MOHAMMED FALEEL &rarr; First Name: MOHAMMED FAZIL, Last Name: MOHAMMED FALEEL.</li>
                 <li><strong>Single-word names:</strong> Enter the same name in both fields. Example: ISKANDAR &rarr; First Name: ISKANDAR, Last Name: ISKANDAR.</li>
             </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.batikair.com.my/faq" target="_blank" rel="noopener">Batik Air FAQ &mdash; "How do I provide my First Name and Last Name when booking a ticket on the website?"</a></p>
 
             <h3>Firefly</h3>
             <p>Uses two fields: <strong>First &amp; Middle Name</strong> and <strong>Last Name / Surname</strong>. Same formatting logic as Malaysia Airlines.</p>
@@ -552,6 +536,58 @@
             <h3>SriLankan Airlines</h3>
             <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Enter your name as it appears on your passport.</p>
             <p style="margin-top:0.5rem;">Reference: <a href="https://www.srilankan.com/en_uk/plan-and-book/passenger-name-tips" target="_blank" rel="noopener">SriLankan Airlines Name Tips</a></p>
+
+            <h3>Scoot</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Middle name should be included in the First Name field (e.g. First Name: JOHN ALLEN, Last Name: DOE). Max 32 characters per field. If you have no surname, enter your full name in the Last Name field.</p>
+            <ul>
+                <li>Only alphanumeric characters — replace special characters with their closest equivalent.</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://help.flyscoot.com/s/article/What-should-I-fill-in-the-name-fields-during-booking-on-Scoot-website-if-I-have-a-middle-name?language=en_US" target="_blank" rel="noopener">Scoot – Name Fields Guide</a> &bull; <a href="https://flyscoot.my.site.com/s/article/What-should-I-fill-in-the-Last-Name-field-during-booking-if-I-do-not-have-a-surname?language=en_US" target="_blank" rel="noopener">Scoot – No Surname Guide</a></p>
+
+            <h3>Cebu Pacific</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Enter your name exactly as it appears on your valid ID. Replace special characters (ñ → N, é → E) with plain letters. Replace apostrophes or hyphens with a space (O'Connor → O CONNOR, Mary-Jane → MARY JANE). If you have a suffix (Jr., Sr., III), include it in the First Name field.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://help.cebupacificair.com/article/updating-your-guest-or-contact-details-122439" target="_blank" rel="noopener">Cebu Pacific Guest Details Guide</a></p>
+
+            <h3>Lion Air</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Enter your full name exactly as it appears on your passport. For single-name passengers, enter the same name in both fields.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.lionairthai.com/en/FAQs" target="_blank" rel="noopener">Lion Air FAQ – "How do I provide my First Name and Last Name when booking?"</a></p>
+
+            <h3>HK Express</h3>
+            <p>Uses two fields: <strong>Surname (Last Name)</strong> and <strong>Given Name (First and Middle Name)</strong>. Remove hyphens, apostrophes, and all special symbols from your name. Single-character surnames are supported. If given name is in non-English characters, enter "FNU" in the Given Name field. If your name exceeds 32 characters, truncate with initials.</p>
+            <ul>
+                <li>Example: O'NIEL &rarr; ONIEL &nbsp;&bull;&nbsp; CHAN Tai-Man &rarr; Surname: CHAN, Given Name: TAI MAN</li>
+                <li>Suffixes (Jr, Sr) should be moved to the Given Name field.</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.hkexpress.com/en/Need-help/Customer-Care/passenger-name-faq" target="_blank" rel="noopener">HK Express Passenger Name FAQ</a></p>
+
+            <h3>Air India</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Include your middle name in the First Name field (e.g. First Name: JOHN ALLEN, Last Name: DOE). Middle name is mandatory for travel to/from the US and Canada.</p>
+            <ul>
+                <li><strong>No surname:</strong> Enter "FNU" in First Name, your full name in Last Name.</li>
+                <li><strong>Single name:</strong> Enter "FNU" in First Name, single name in Last Name &mdash; or enter the same name in both fields.</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.airindia.com/in/en/passenger-name-format.html" target="_blank" rel="noopener">Air India Passenger Name Format</a> &bull; <a href="https://www.airindia.com/in/en/frequently-asked-questions/booking.html" target="_blank" rel="noopener">Air India Booking FAQ</a></p>
+
+            <h3>Etihad Airways</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. There is no separate middle name field &mdash; include your middle name in the First Name field (e.g. First Name: SAMUEL JONATHAN, Last Name: VICTOR). Names entered will appear on the ticket joined without spaces in some cases; this is normal.</p>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.etihad.com/en/help/faq#accordion-4bb2275e71-item-41a6f4a7ad" target="_blank" rel="noopener">Etihad Airways FAQ – Name Format</a></p>
+
+            <h3>Saudia</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. Enter your name exactly as shown on your passport.</p>
+            <ul>
+                <li><strong>No last name:</strong> Enter "LNU" in Last Name, your given name in First Name.</li>
+                <li><strong>No first name:</strong> Enter "FNU" in First Name, your surname in Last Name.</li>
+                <li><strong>Single name:</strong> Enter "FNU" in First Name, your single name in Last Name.</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.saudia.com/Support/HelpAndSupport/FAQs?sc_lang=en&sc_country=SA" target="_blank" rel="noopener">Saudia FAQ – Booking</a></p>
+
+            <h3>Oman Air</h3>
+            <p>Uses two fields: <strong>First Name</strong> and <strong>Last Name</strong>. The full name (first + middle + last) must not exceed 27 characters including spaces. If the character limit is exceeded, use only the initial letter for the middle name.</p>
+            <ul>
+                <li><strong>No surname:</strong> Enter "FNU" in First Name, your full name in Last Name.</li>
+                <li><strong>Single name:</strong> Contact Oman Air directly for guidance.</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Reference: <a href="https://www.omanair.com/en/faq-booking" target="_blank" rel="noopener">Oman Air Booking FAQ</a></p>
         </div>
     </section>
 
@@ -652,177 +688,144 @@
                     { key: "first", label: "First Name" },
                     { key: "last", label: "Last Name" }
                 ]
+            },
+            scoot: {
+                label: "Scoot",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            cebu_pacific: {
+                label: "Cebu Pacific",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            lion_air: {
+                label: "Lion Air",
+                duplicateSingle: true,
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            hk_express: {
+                label: "HK Express",
+                fields: [
+                    { key: "last", label: "Surname (Last Name)" },
+                    { key: "first", label: "Given Name (First and Middle Name)" }
+                ]
+            },
+            air_india: {
+                label: "Air India",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            etihad: {
+                label: "Etihad Airways",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            saudia: {
+                label: "Saudia",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
+            },
+            oman_air: {
+                label: "Oman Air",
+                fields: [
+                    { key: "first", label: "First Name" },
+                    { key: "last", label: "Last Name" }
+                ]
             }
         };
 
-        const MALAY_MARKERS = ["BIN", "BINTI", "BINTE", "ANAK", "A/L", "A/P"];
-
-        const airlineEl = document.getElementById("airline");
-        const fullnameEl = document.getElementById("fullname");
-        const nameTypeGroup = document.getElementById("name-type-group");
-        const resultCard = document.getElementById("result");
+        const airlineEl        = document.getElementById("airline");
+        const givenNameEl      = document.getElementById("givenname");
+        const patronymicEl     = document.getElementById("patronymic");
+        const surnameEl        = document.getElementById("surname");
+        const resultCard   = document.getElementById("result");
         const resultFields = document.getElementById("result-fields");
-        const resultLabel = document.getElementById("result-airline-label");
-        const nameTypeBtns = document.querySelectorAll(".name-type-btn");
+        const resultLabel  = document.getElementById("result-airline-label");
 
-        let selectedType = "auto";
-
-        nameTypeBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                nameTypeBtns.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                selectedType = btn.dataset.type;
-                update();
-            });
-        });
-
-        airlineEl.addEventListener("change", update);
-        fullnameEl.addEventListener("input", () => {
-            fullnameEl.value = fullnameEl.value.toUpperCase();
-            update();
-        });
-
-        function cleanName(raw) {
+        function sanitize(raw) {
             return raw
-                .replace(/[@]/g, " ")
-                .replace(/[-]/g, " ")
-                .replace(/[^A-Z\s\/]/g, "")
+                .replace(/[@\-]/g, " ")
+                .replace(/[^A-Z\s]/g, "")
                 .replace(/\s+/g, " ")
                 .trim();
         }
 
-        function detectType(parts) {
-            for (let i = 0; i < parts.length; i++) {
-                const combined = parts.slice(i).join(" ");
-                for (const marker of MALAY_MARKERS) {
-                    if (combined === marker || combined.startsWith(marker + " ")) {
-                        return "malay";
-                    }
-                }
-            }
-            return "other";
-        }
+        [givenNameEl, patronymicEl, surnameEl].forEach(el => {
+            el.addEventListener("input", () => {
+                el.value = el.value.toUpperCase();
+                update();
+            });
+        });
+        airlineEl.addEventListener("change", update);
 
-        function splitName(name, type, airlineOpts) {
-            const parts = name.split(" ").filter(Boolean);
-            if (parts.length === 0) return null;
+        function computeFields(given, patronymic, surname, airline) {
+            const isSingleName = !surname && !patronymic;
 
-            const dropMarker = airlineOpts && airlineOpts.dropMarker;
-            const duplicateSingle = airlineOpts && airlineOpts.duplicateSingle;
-            const threeFields = airlineOpts && airlineOpts.threeFields;
-            const noSpaces = airlineOpts && airlineOpts.noSpaces;
+            // Surname as it goes into the booking field:
+            // - Airlines that keep the patronymic: "BIN HAMEDI"
+            // - Batik Air (dropMarker): "HAMEDI" only
+            const surnameWithP = patronymic && surname
+                ? patronymic + " " + surname
+                : (patronymic || surname);
+            const effectiveSurname = airline.dropMarker ? surname : surnameWithP;
 
-            if (parts.length === 1) {
-                const val = parts[0];
-                if (duplicateSingle) {
-                    return { first: val, middle: "", last: val };
-                }
-                return { first: val, middle: "", last: "" };
-            }
+            // For 3-field airlines, split the given name at the first space
+            const givenParts = given.split(/\s+/).filter(Boolean);
+            const firstName3  = givenParts[0] || "";
+            const middleName3 = givenParts.slice(1).join(" ");
 
-            const effectiveType = type === "auto" ? detectType(parts) : type;
+            let first = "", middle = "", last = "";
 
-            let firstName = "", middleName = "", lastName = "";
-
-            if (effectiveType === "malay") {
-                let markerIdx = -1, markerLen = 0;
-                for (let i = 0; i < parts.length; i++) {
-                    const rest = parts.slice(i).join(" ");
-                    for (const marker of MALAY_MARKERS) {
-                        if (rest === marker || rest.startsWith(marker + " ")) {
-                            markerIdx = i;
-                            markerLen = marker.split(" ").length;
-                            break;
-                        }
-                    }
-                    if (markerIdx >= 0) break;
-                }
-
-                if (markerIdx >= 0) {
-                    const givenParts = parts.slice(0, markerIdx);
-                    if (dropMarker) {
-                        lastName = parts.slice(markerIdx + markerLen).join(" ");
-                    } else {
-                        lastName = parts.slice(markerIdx).join(" ")
-                            .replace(/^A\/L\b/, "").replace(/^A\/P\b/, "").trim();
-                    }
-                    if (givenParts.length === 0) {
-                        firstName = lastName;
-                        lastName = "";
-                    } else if (threeFields && givenParts.length > 1) {
-                        firstName = givenParts[0];
-                        middleName = givenParts.slice(1).join(" ");
-                    } else {
-                        firstName = givenParts.join(" ");
-                    }
-                } else {
-                    if (threeFields && parts.length > 2) {
-                        firstName = parts[0];
-                        middleName = parts.slice(1, -1).join(" ");
-                        lastName = parts[parts.length - 1];
-                    } else {
-                        firstName = parts.slice(0, -1).join(" ");
-                        lastName = parts[parts.length - 1];
-                    }
-                }
-            } else if (effectiveType === "chinese") {
-                lastName = parts[0];
-                const givenParts = parts.slice(1);
-                if (threeFields && givenParts.length > 1) {
-                    firstName = givenParts[0];
-                    middleName = givenParts.slice(1).join(" ");
-                } else {
-                    firstName = givenParts.join(" ");
-                }
-            } else if (effectiveType === "indian") {
-                lastName = parts[parts.length - 1];
-                const givenParts = parts.slice(0, -1);
-                if (threeFields && givenParts.length > 1) {
-                    firstName = givenParts[0];
-                    middleName = givenParts.slice(1).join(" ");
-                } else {
-                    firstName = givenParts.join(" ");
-                }
+            if (isSingleName && airline.duplicateSingle) {
+                // e.g. Batik Air / China Airlines with only a single name
+                first = given;
+                last  = given;
+            } else if (airline.threeFields) {
+                first  = firstName3;
+                middle = middleName3;
+                last   = effectiveSurname;
             } else {
-                lastName = parts[parts.length - 1];
-                const givenParts = parts.slice(0, -1);
-                if (threeFields && givenParts.length > 1) {
-                    firstName = givenParts[0];
-                    middleName = givenParts.slice(1).join(" ");
-                } else {
-                    firstName = givenParts.join(" ");
-                }
+                first = given;
+                last  = effectiveSurname;
             }
 
-            if (noSpaces) {
-                firstName = firstName.replace(/\s+/g, "");
-                middleName = middleName.replace(/\s+/g, "");
-                lastName = lastName.replace(/\s+/g, "");
+            if (airline.noSpaces) {
+                first  = first.replace(/\s+/g, "");
+                middle = middle.replace(/\s+/g, "");
+                last   = last.replace(/\s+/g, "");
+                if (isSingleName && airline.duplicateSingle) last = first;
             }
 
-            return { first: firstName, middle: middleName, last: lastName };
+            return { first, middle, last };
         }
 
         function update() {
             const airlineKey = airlineEl.value;
-            const raw = fullnameEl.value;
-            const name = cleanName(raw);
+            const given      = sanitize(givenNameEl.value);
+            const patronymic = sanitize(patronymicEl.value);
+            const surname    = sanitize(surnameEl.value);
 
-            if (!airlineKey || !name) {
+            if (!airlineKey || !given) {
                 resultCard.classList.remove("visible");
-                nameTypeGroup.classList.toggle("hidden", !name);
                 return;
             }
-
-            nameTypeGroup.classList.remove("hidden");
 
             const airline = AIRLINES[airlineKey];
-            const result = splitName(name, selectedType, airline);
-
-            if (!result) {
-                resultCard.classList.remove("visible");
-                return;
-            }
+            const result  = computeFields(given, patronymic, surname, airline);
 
             resultLabel.textContent = "Formatted for " + airline.label;
 
